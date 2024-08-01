@@ -1,12 +1,12 @@
-"Updated Repository for Week 8" 
+"Updated Repository for Week 9" 
 
-MySQL Week 8 Coding Assignment
+MySQL Week 9 Coding Assignment | Promineo Tech 2024
 
-In this exercise, you will:
+This exercise covered how to:
 
-·Learn how to create an Entity-Relationship Diagram (ERD) in Draw.io with entities and relationship lines.
-
-·Learn about crows' foot notation and how to apply that knowledge in an Entity Relationship Diagram.
-
-·Apply your knowledge of DROP TABLE and CREATE TABLE statements to create tables using a MySQL client (DBeaver),
+• Write a menu-driven application with correct exception handling.
+• Implement a scanner to gather user input from the console.
+• How to work with BigDecimal objects.
+• Use JDBC to correctly handle resources (Connections and PreparedStatements) ensuring that they are closed properly.
+• Implement JDBC methods to insert a Project object into the project table.
 
