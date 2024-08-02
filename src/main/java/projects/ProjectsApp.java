@@ -11,7 +11,7 @@ import projects.service.ProjectService;
 
 public class ProjectsApp {
 	private Scanner scanner = new Scanner(System.in);
-	private ProjectService projectservice = new ProjectService();
+	private ProjectService projectService = new ProjectService();
 
 	// @formatter:off
 	private List<String> operations = List.of(
@@ -76,7 +76,7 @@ public class ProjectsApp {
 		project.setDifficulty(difficulty);
 		project.setNotes(notes);
 		
-		Project dbProject = ProjectService.addProject(project); // check this
+		Project dbProject = projectService.addProject(project); // check this
 		System.out.println("You have successfully created project: " + dbProject);
 	}
 
