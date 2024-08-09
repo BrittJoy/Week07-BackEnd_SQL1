@@ -1,16 +1,16 @@
-"Updated Repository for Week 9" 
+"Updated Repository for Week 10" 
 
-MySQL Week 9 Coding Assignment | Promineo Tech 2024
+MySQL Week 10 Coding Assignment | Promineo Tech 2024
 
 This exercise covered how to:
 
-• Write a menu-driven application with correct exception handling.
+•  Hone SQL query skills by writing SQL statements to fetch a List of Project records.
 
-• Implement a scanner to gather user input from the console.
+•  Learn how to perform multiple queries in a single transaction.
 
-• How to work with BigDecimal objects.
+•  Write an inner join to fetch category rows related to a project row.
 
-• Use JDBC to correctly handle resources (Connections and PreparedStatements) ensuring that they are closed properly.
+•  Use an Optional to either return a project record or to throw a custom Exception.
 
-• Implement JDBC methods to insert a Project object into the project table.
+•  Practice writing Lambda expressions both to list the projects and to throw a custom Exception from an Optional.
 
