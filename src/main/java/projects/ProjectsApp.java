@@ -18,7 +18,9 @@ public class ProjectsApp {
 	private List<String> operations = List.of(
 		"1) Add a project",
 		"2) List projects",
-		"3) Select a project"
+		"3) Select a project",
+		"4) Update project details",
+		"5) Delete a project"
 		);
 	// @formatter:on
 
@@ -28,9 +30,9 @@ public class ProjectsApp {
 		new ProjectsApp().processUserSelections();
 	}
 
-	/*
-	 * This method prints the operations, gets a user menu selection, and performs the requested operation. Repeats until user exits the program.
-	 */
+	
+	 //This method prints the operations, gets a user menu selection, and performs the requested operation. Repeats until user exits the program.
+	 
 	private void processUserSelections() {
 		boolean done = false;
 		
@@ -56,6 +58,14 @@ public class ProjectsApp {
 					selectProject();
 					break;
 					
+				case 4:
+					updateProjectDetails();
+					break;
+					
+				case 5:
+					deleteProject();
+					break;
+					
 				default:
 					System.out.println("\n" + selection + " is not a valid selection. Try again.");
 					break;
@@ -68,7 +78,57 @@ public class ProjectsApp {
 		}
 
 	}
+	//This method allows the user to delete a project
 
+		private void deleteProject() {
+			listProjects();
+			Integer projectId = getIntInput("Enter the project ID of the project you wish to delete.");
+			
+			projectService.deleteProject(projectId);
+			System.out.println("Project " + projectId + " was successfully deleted.");
+			
+			if(Objects.nonNull(curProject) && curProject.getProjectId().equals(projectId)) {
+				curProject = null;
+			}
+
+	}
+
+	//This method allows the user to modify project details within the project table
+		
+		private void updateProjectDetails() {
+			if(Objects.isNull(curProject)) {
+				System.out.println("\nPlease select a project.");
+				return;
+			}
+			
+			String projectName = getStringInput("Enter the project name [" + curProject.getProjectName() + "]");
+			
+			BigDecimal estimatedHours = getDecimalInput("Enter the estimated hours [" + curProject.getEstimatedHours() + "]");
+			
+			BigDecimal actualHours = getDecimalInput("Enter the actual hours + [" + curProject.getActualHours() + "]");
+			
+			Integer difficulty = getIntInput("Enter the project difficulty (1-5) [" + curProject.getDifficulty() + "]");
+			
+			String notes = getStringInput("Enter the project notes [" + curProject.getNotes() + "]");
+			
+			Project project = new Project();
+			
+			project.setProjectId(curProject.getProjectId());
+			project.setProjectName(Objects.isNull(projectName) ? curProject.getProjectName() : projectName);
+			
+			project.setEstimatedHours(Objects.isNull(estimatedHours) ? curProject.getEstimatedHours() : estimatedHours);
+			
+			project.setActualHours(Objects.isNull(actualHours) ? curProject.getActualHours() : actualHours);
+			project.setDifficulty(Objects.isNull(difficulty) ? curProject.getDifficulty() : difficulty);
+			project.setNotes(Objects.isNull(notes) ? curProject.getNotes() : notes);
+			
+			projectService.modifyProjectDetails(project);
+			
+			curProject = projectService.fetchProjectById(curProject.getProjectId());
+	}
+
+		//Method for selecting a project from the menu list
+		
 		private void selectProject() {
 			listProjects();
 			Integer projectId = getIntInput("Enter a project ID to select a project");
@@ -78,6 +138,8 @@ public class ProjectsApp {
 			curProject = projectService.fetchProjectById(projectId);
 	}
 
+		//Method to list created projects in the menu application
+		
 		private void listProjects() {
 			List<Project> projects = projectService.fetchAllProjects();
 			
@@ -87,9 +149,8 @@ public class ProjectsApp {
 			
 	}
 
-		/*
-		 * Gather user input for a project row then call the project service to create the row.
-		 */
+		//Method used to gather user input for a project row then call the project service to create the row.
+		
 	private void createProject() {
 		String projectName = getStringInput("Enter the project name");
 		BigDecimal estimatedHours = getDecimalInput("Enter the estimated hours");
@@ -109,9 +170,9 @@ public class ProjectsApp {
 		System.out.println("You have successfully created project: " + dbProject);
 	}
 
-	/*
-	 * Gets the user's input from the console and converts it to a Big Decimal.
-	 */
+	
+	 //Method that gets the user's input from the console and converts it to a Big Decimal.
+	 
 	private BigDecimal getDecimalInput(String prompt) {
 		String input = getStringInput(prompt);
 
@@ -127,17 +188,17 @@ public class ProjectsApp {
 
 	}
 
-	/*
-	 * Program to allow user to exit and terminate the app.
-	 */
+	
+	 //Method to allow a user to exit and terminate the application.
+	 
 	private boolean exitMenu() {
 		System.out.println("Exiting the menu.");
 		return true;
 	}
 
-	/*
-	 * Prints the available menu selections for the user to choose. Converts the user's menu selection input into an int.
-	 */
+	
+	 // Prints the available menu selections for the user to choose. Converts the user's menu selection input into an int.
+	 
 	private int getUserSelection() {
 		printOperations();
 
@@ -146,10 +207,9 @@ public class ProjectsApp {
 		return Objects.isNull(input) ? -1 : input;
 	}
 	
-	/*
-	 * Prints a prompt to the console to get user's input. Then converts the input into an Integer.
-	 */
-
+	
+	 // Prints a prompt to the console to get user's input. Then converts the input into an Integer.
+	 
 	private Integer getIntInput(String prompt) {
 		String input = getStringInput(prompt);
 
@@ -165,9 +225,9 @@ public class ProjectsApp {
 
 	}
 
-	/*
-	 * Prints a prompt on the console to retrieve user's input.
-	 */
+	
+	 // Prints a prompt on the console to retrieve user's input.
+	 
 	private String getStringInput(String prompt) {
 		System.out.print(prompt + ": ");
 		String input = scanner.nextLine();
@@ -175,9 +235,9 @@ public class ProjectsApp {
 		return input.isBlank() ? null : input.trim();
 	}
 
-	/*
-	 * Prints the menu selections, one per line, using Lambda expression.
-	 */
+	
+	 // Prints the menu selections, one per line, using Lambda expression.
+	 
 	private void printOperations() {
 		System.out.println();
 		System.out.println("\nThese are the available selections. Press the Enter key to quit: ");

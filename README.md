@@ -1,16 +1,14 @@
-"Updated Repository for Week 10" 
+"Updated Repository for Week 11" 
 
-MySQL Week 10 Coding Assignment | Promineo Tech 2024
+MySQL Week 11 Coding Assignment | Promineo Tech 2024
 
 This exercise covered how to:
 
-•  Hone SQL query skills by writing SQL statements to fetch a List of Project records.
+•  Modify project details using the UPDATE statement.
 
-•  Learn how to perform multiple queries in a single transaction.
+•  Delete a project and all child rows using the DELETE statement.
 
-•  Write an inner join to fetch category rows related to a project row.
+•  Observe that using ON DELETE CASCADE automatically deletes child rows with a foreign key relationship.
 
-•  Use an Optional to either return a project record or to throw a custom Exception.
-
-•  Practice writing Lambda expressions both to list the projects and to throw a custom Exception from an Optional.
+•  Use the return value from PreparedStatement.executeUpdate() to determine if a row was updated or deleted.
 
